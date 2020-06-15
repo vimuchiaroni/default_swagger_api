@@ -1,0 +1,113 @@
+---
+swagger: "2.0"
+info:
+  description: "default rest API"
+  version: "1.0.0"
+  title: "Defaul rest API"
+  contact:
+    email: ""
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "localhost:8091"
+basePath: "/api"
+schemes:
+- "https"
+- "http"
+paths:
+  /context/{jobTemplate}:
+    post:
+      summary: "Post example with a path variable"
+      description: "Post example with a path variable"
+      operationId: "runJob"
+      consumes:
+      - "application/json"
+      produces:
+      - "application/json"
+      parameters:
+      - name: "dicData"
+        in: "body"
+        description: "e"
+        required: true
+        schema:
+          type: object
+          properties:
+            nome:
+              type: string
+      - name: "jobTemplate"
+        in: "path"
+        description: "r"
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/DefaultRS"
+        "403":
+          description: "Forbidden operation"
+          schema:
+            $ref: "#/definitions/DefaultRS"
+        "406":
+          description: "Not acceptable operation"
+          schema:
+            $ref: "#/definitions/DefaultRS"
+        "500":
+          description: "Internal server error operation"
+          schema:
+            $ref: "#/definitions/DefaultRS"
+
+      x-swagger-router-controller: "swagger_server.controllers.request"
+
+  /getjob/{jobID}:
+    get:
+      summary: "get example with a path and body variables"
+      description: "get example with a path and body variables"
+      operationId: "getJob"
+      parameters:
+      - name: "jobID"
+        in: "path"
+        description: ""
+        required: true
+        type: "integer"
+        format: "int64"
+      responses:
+        "200":
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/DefaultRS"
+        "403":
+          description: "Forbidden operation"
+          schema:
+            $ref: "#/definitions/DefaultRS"
+        "406":
+          description: "Not acceptable operation"
+          schema:
+            $ref: "#/definitions/DefaultRS"
+        "500":
+          description: "Internal server error operation"
+          schema:
+            $ref: "#/definitions/DefaultRS"
+      x-swagger-router-controller: "swagger_server.controllers.response"
+definitions:
+  DefaultRS:
+    type: "object"
+    properties:
+      status:
+        $ref: "#/definitions/StatusType"
+    example:
+      status:
+        code: 0
+        message: "message"
+  StatusType:
+    type: "object"
+    required:
+    - "code"
+    properties:
+      code:
+        type: "integer"
+      message:
+        type: "string"
+    example:
+      code: 0
